@@ -6,7 +6,7 @@ import path from 'path';
 import fileDirName from './file-dir-name.js';
 const { __dirname, __filename } = fileDirName(import.meta);
 const API_KEY = process.env.API_KEY;
-await mongoose.connect(`mongodb+srv://Jevonx:${API_KEY}@cluster0.q4o1wzp.mongodb.net/?retryWrites=true&w=majority`, { dbName: 'expressConnect' })
+await mongoose.connect(`mongodb+srv://Jevonx:${API_KEY}@cluster0.q4o1wzp.mongodb.net/?retryWrites=true&w=majority`, { dbName: 'yelpTrails' })
     .then(() => { console.log("Connection succesful"); })
     .catch((err) => { console.log(`Connection errrorrrr`); });
 const app = express();

@@ -1,6 +1,20 @@
 import mongoose from 'mongoose'
 const {Schema} = mongoose;
-
+const commentSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    posted: {
+        type: Date,
+        required: true,
+        default: new Date
+    }, 
+    text: {
+        type: String, 
+        require: true
+    }
+})
 const trailSchema = new Schema( {
     name : {
         type:String,
@@ -21,9 +35,34 @@ const trailSchema = new Schema( {
     description : {
         type: String, 
         required: false 
+    },
+    comments: {
+        type: [commentSchema],
+        required: true,
+        default: {}
     }
 })
 
-const trail = mongoose.model('trail',trailSchema)
+const userSchema = new Schema({
+    name: {
+        type: String, 
+        required: true
+    },
+    birthDay: {
+        type: Date,
+        required: true
+    },
+    // age: (new Date - birthDay),
+    comments: {
+        type: [String],
+        required: true,
+        default: []
+    }
 
-export {trail,trailSchema} 
+})
+
+const trail = mongoose.model('trail',trailSchema)
+const user = mongoose.model('trail',userSchema)
+const comment = mongoose.model('trail',commentSchema)
+
+export {trail,user,comment }
