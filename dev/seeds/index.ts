@@ -31,10 +31,10 @@ const getRandomTag = ():String=> {
     return tagTypes[randomNumberGenerator(tagTypes.length)]
 }
 
-const getThreeTags = ():[String]=> {
+const getFiveTags = ():[String]=> {
     let tempTagArray:[String] = ['Empty'];
 
-    for (let i=0;tempTagArray.length < 4;i++) {
+    for (let i=0;tempTagArray.length < 6;i++) {
         let newTag = getRandomTag();
         if (tempTagArray.includes(newTag)) {
         }else {
@@ -55,7 +55,7 @@ const seedCamp = async ()=> {
             price: randomNumberGenerator(100),
             owner: getOwnerName(),
             rating: getRandomRating(),
-            tags: [...getThreeTags()],
+            tags: [...getFiveTags()],
             location : city 
         }
         )
@@ -68,7 +68,7 @@ const deleteCampData = async()=> await trail.deleteMany();
 
 
 // await deleteCampData()
-// await seedCamp()
+await seedCamp()
 
 console.log(await trail.find({})
     //@ts-ignore
