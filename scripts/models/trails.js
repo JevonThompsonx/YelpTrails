@@ -15,33 +15,6 @@ const commentSchema = new Schema({
         require: true
     }
 });
-const trailSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: false
-    },
-    owner: {
-        type: String,
-        required: false,
-        default: 'Unknown'
-    },
-    location: {
-        type: String
-    },
-    description: {
-        type: String,
-        required: false
-    },
-    comments: {
-        type: [commentSchema],
-        required: true,
-        default: {}
-    }
-});
 const userSchema = new Schema({
     name: {
         type: String,
@@ -58,7 +31,76 @@ const userSchema = new Schema({
         default: []
     }
 });
+const locationSchema = new Schema({
+    city: {
+        type: String,
+        required: true
+    },
+    growth_from_2000_to_2013: {
+        type: String,
+        required: false,
+        default: 'unknown'
+    }, latitude: {
+        type: Number,
+        required: true
+    },
+    longitude: {
+        type: Number,
+        required: true
+    }, population: {
+        type: String,
+        required: true
+    }, rank: {
+        type: String,
+        required: true
+    }, state: {
+        type: String,
+        required: true
+    }
+});
+//chat gpt generated tag names
+//Prompt: "Give me a long javascript array of commonly used descriptive words for a hiking trail"
+import { tagTypes } from '../seeds/seedData/index.js';
+const trailSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: false
+    },
+    owner: {
+        type: String,
+        required: false,
+        default: 'Unknown'
+    },
+    location: {
+        type: locationSchema,
+        required: true
+    },
+    description: {
+        type: String,
+        required: false
+    },
+    comments: {
+        type: [commentSchema],
+        required: false,
+        default: []
+    },
+    tags: {
+        type: [...tagTypes],
+        required: false,
+        decault: []
+    },
+    rating: {
+        type: String,
+        required: false,
+        default: "⭐⭐⭐"
+    }
+});
 const trail = mongoose.model('trail', trailSchema);
-const user = mongoose.model('trail', userSchema);
-const comment = mongoose.model('trail', commentSchema);
-export { trail, user, comment };
+const user = mongoose.model('user', userSchema);
+const comment = mongoose.model('comment', commentSchema);
+const location = mongoose.model('location', locationSchema);
+export { trail, user, comment, location, trailSchema };
