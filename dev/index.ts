@@ -1,7 +1,7 @@
 import express from 'express'
 import path from 'path';
 import ejs from 'ejs';
-// @ts-ignore
+//@ts-ignore
 import {trail,user,comment} from './models/trails.js'
 import connectionString from './connectionString.js'
 
