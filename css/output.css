@@ -542,8 +542,8 @@ video {
   height: 100%;
 }
 
-.h-screen {
-  height: 100vh;
+.flex-col {
+  flex-direction: column;
 }
 
 .items-center {
@@ -552,6 +552,10 @@ video {
 
 .justify-center {
   justify-content: center;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
 }
 
 .text-3xl {

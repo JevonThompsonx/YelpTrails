@@ -1,5 +1,7 @@
 import express from 'express';
 import path from 'path';
+//@ts-ignore
+import { trail } from './models/trails.js';
 import connectionString from './connectionString.js';
 import fileDirName from './file-dir-name.js';
 const { __dirname, __filename } = fileDirName(import.meta);
@@ -14,4 +16,9 @@ app.listen(port, () => { console.log(`Listening on port ${port}`); });
 await connectionString();
 app.get('/', (req, res) => {
     res.render('home');
+});
+app.get('/someTrails', async (req, res) => {
+    const allTrails = await trail.find({});
+    const someTrails = allTrails.slice(0, 5);
+    res.render('trails', { allTrails, someTrails });
 });

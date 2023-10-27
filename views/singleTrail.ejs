@@ -1,0 +1,28 @@
+<%- include('heads/head.ejs') %>
+
+<% for (let trail of someTrails) { %>
+    <section class="h-5/6 w-full flex flex-row mx-auto">
+    <img class="h-full w-auto flex-auto" alt="" src="https://theplanetd.com/images/Best-Places-To-Hike-In-California.jpg">
+    <!-- <img src="" alt="Image of trail.name trail" srcset="<%# have a list of 3 image sources here from db %>"> -->
+    <div class="flex h-full flex-auto">
+    <p class="trailName"><%= trail.name %></p>
+    <p class="trailOwner"><%= trail.owner %></p>
+    <div class="trailTags flex flex-auto">
+        <% for (let tag of trail.tags) { %>
+            <p><%= tag %></p>
+        <% } %>
+    </div>
+    <div class="trailRankAndPrice flex flex-row flex-auto">
+        <p class="trailRank"><%= tail.rank %></p>
+        <p class="trailPrice"><%= trail.price %></p>
+    </div>
+    </div>
+    <div class="trailLocation">
+        <p class="cityAndState"><%=trail.location.city%>,<%=trail.location.state%></p>
+    </div>
+    </section>
+<% } %>
+
+
+
+<%- include('heads/foot.ejs') %>
