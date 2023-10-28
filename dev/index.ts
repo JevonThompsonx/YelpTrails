@@ -27,12 +27,13 @@ app.get('/',(req,res)=> {
 }) 
 app.get('/trails/all',async (req,res)=> {
     const allTrails = await trail.find({})
-    res.render('allTrails',{allTrails})
+    const someTrails = allTrails.slice(0,10)
+    res.render('allTrails',{allTrails,someTrails})
 })
 
 app.get('/trails/:id',async (req,res)=> {
-    const {id:trailId} = req.body
-    const singleTrail = await trail.find({id:trailId})
+    const {id:trailId} = req.params
+    const singleTrail = await trail.findById(trailId)
     res.render('singleTrail',{singleTrail})
 })
 

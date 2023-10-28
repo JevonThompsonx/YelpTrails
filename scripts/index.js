@@ -17,8 +17,13 @@ await connectionString();
 app.get('/', (req, res) => {
     res.render('home');
 });
-app.get('/someTrails', async (req, res) => {
+app.get('/trails/all', async (req, res) => {
     const allTrails = await trail.find({});
-    const someTrails = allTrails.slice(0, 5);
-    res.render('trails', { allTrails, someTrails });
+    const someTrails = allTrails.slice(0, 10);
+    res.render('allTrails', { allTrails, someTrails });
+});
+app.get('/trails/:id', async (req, res) => {
+    const { id: trailId } = req.params;
+    const singleTrail = await trail.findById(trailId);
+    res.render('singleTrail', { singleTrail });
 });
