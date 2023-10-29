@@ -1,0 +1,13 @@
+<%- include('heads/head',{pageName: `Tags | ${tag}`}) %>
+<section class="h-5/6 w-full flex flex-col items-center my-auto">
+    <h1 class="text-4xl mt-10 "> <i><%= tag %></i>  Trails</h1>
+    <div class="h-full w-full flex flex-wrap justify-evenly items-center">
+        <% for (let taggedTrail of taggedTrails ) { %>
+        <%- include('partials/trailPartial.ejs',{singleTrail:taggedTrail}) %>
+        <% } %>
+    </div>
+
+
+</section>
+
+<%- include('heads/foot') %>
