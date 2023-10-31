@@ -39,6 +39,6 @@ app.get('/trails/owners/:id',async (req,res)=> {
 
 app.get('/trails/tags/:id',async (req,res)=> {
     const {id:tag} = req.params
-    const taggedTrails = await trail.find({tags:tag })
+    const taggedTrails = await trail.find({tags:tag})
     res.render('tag',{tag,taggedTrails})
 })
