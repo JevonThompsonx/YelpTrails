@@ -1,0 +1,15 @@
+<%- include('../heads/head') %>
+<%- include('../partials/nav') %>
+
+<section class="h-5/6 w-full flex flex-col my-auto items-center">
+
+    <h1 class="text-7xl mt-10">All trails</h1>
+    <div class="h-full w-full flex flex-wrap justify-evenly items-center">
+    <% for (let singleTrail of allTrails ) { %>
+
+                <%- include('../partials/trailPartial.ejs',{singleTrail}) %>
+    <% } %>
+        </div>
+</section>
+
+<%- include('../heads/foot') %>
