@@ -42,17 +42,17 @@ const locationSchema = new Schema({
         default: 'unknown'
     }, latitude: {
         type: Number,
-        required: true
+        required: false
     },
     longitude: {
         type: Number,
-        required: true
+        required: false
     }, population: {
         type: String,
-        required: true
+        required: false
     }, rank: {
         type: String,
-        required: true
+        required: false
     }, state: {
         type: String,
         required: true

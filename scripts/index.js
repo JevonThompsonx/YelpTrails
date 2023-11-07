@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import { trail } from './models/trails.js';
 import connectionString from './connectionString.js';
+import tagTypes from './seeds/seedData/tagTypes.js';
 import fileDirName from './file-dir-name.js';
 const { __dirname, __filename } = fileDirName(import.meta);
 const app = express();
@@ -43,11 +44,28 @@ app.get('/trails/tags/:id', async (req, res) => {
     res.render('trails/tag', { tag, taggedTrails, pageName });
 });
 app.get('/newTrail', (req, res) => {
-    res.render('trails/new', { pageName: 'New Trail' });
+    res.render('trails/new', { pageName: 'New Trail', tagTypes });
 });
 app.post('/newTrail', async (req, res) => {
-    const { newTrailName } = req.body;
-    console.log(newTrailName);
+    const { newTrailName, newTrailOwner, newTrailCity, newTrailState } = req.body;
+    const selectedTags = [];
+    for (const potentialTag in req.body) {
+        if (req.body[`${potentialTag}`] === 'on') {
+            selectedTags.push(potentialTag);
+        }
+        else {
+        }
+    }
+    const newTrail = new trail({
+        name: newTrailName,
+        owner: newTrailOwner,
+        location: {
+            city: newTrailCity,
+            state: newTrailState
+        },
+        tags: [...selectedTags]
+    });
+    await newTrail.save();
 });
 app.get('*', (req, res) => {
     res.render('unknownPage', { pageName: 'Unknown page' });
