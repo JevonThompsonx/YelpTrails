@@ -1,21 +1,25 @@
 <%- include('../heads/head.ejs') %>
 <%- include('../partials/nav.ejs') %>
+    <% const {name,owner,location,price,_id} = singleTrail   %>
 
 <main class="form-div h-screen flex items-center justify-center">
 
     <form class="h-fit w-auto max-w-[80%] max-h-[80%] aspect-square bg-orange-400
      border-zinc-950 rounded-lg border-solid border-2
     flex flex-col justify-evenly items-center 
-    text-lg " action="/newTrail" method="post">
-    <% const {name,owner,location} = singleTrail   %>
+    text-lg py-2" action="/trails/<%=_id%>/edit" method="post">
         <h1>New Trail Form </h1>
         <div class="flex justify-evenly items-center w-full h-10">
             <label for="trailName">Name:</label>
             <input class="w-1/2 h-full p-2" value="<%=name%>"  type="text" name="newTrailName" id="trailName">
         </div>
         <div class="flex justify-evenly items-center w-full h-10">
-            <label for="trailOwner">Owner:</label>
-            <input class="w-1/2 h-full p-2" value="<%= owner %>" type="text" name="newTrailOwner" id="trailOwner">
+            <label >Owner:</label>
+            <label class="w-1/2 h-full p-2"><%= owner %></label>
+        </div>
+        <div class="flex justify-evenly items-center w-full h-10">
+            <label for="trailPrice">Price:</label>
+            <input class="w-1/2 h-full p-2" value="<%= price %>" type="text" name="newTrailPrice" id="trailPrice">
         </div>
         <label for="trailLocation">Trail Location:</label>
         <div class="flex justify-evenly items-center w-full h-24">
