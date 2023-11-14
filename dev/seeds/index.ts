@@ -1,7 +1,7 @@
 import mongoose from 'mongoose' 
 import seedConnectionString from './seedConnectionString.js'
 
-import { trail,trailSchema, location} from '../models/trails.js';
+import { trail,trailSchema, location} from '../models/index.js';
 
 
 await seedConnectionString();

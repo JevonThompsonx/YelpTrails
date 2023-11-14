@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import {trail,user,comment} from '../models/trails.js'
+import {trail,user,comment} from '../models/index.js'
 import seedConnectionString from './seedConnectionString.js'
 await seedConnectionString();
 

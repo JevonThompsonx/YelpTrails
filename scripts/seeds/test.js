@@ -1,4 +1,4 @@
-import { trail } from '../models/trails.js';
+import { trail } from '../models/index.js';
 import seedConnectionString from './seedConnectionString.js';
 await seedConnectionString();
 //test used to check succesful connection to db

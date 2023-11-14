@@ -1,5 +1,5 @@
 import seedConnectionString from './seedConnectionString.js';
-import { trail } from '../models/trails.js';
+import { trail } from '../models/index.js';
 await seedConnectionString();
 import 'dotenv/config';
 const randomNumberGenerator = (max) => Math.floor(Math.random() * max);
