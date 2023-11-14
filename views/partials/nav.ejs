@@ -1,24 +1,30 @@
 <nav class="h-screen w-20 fixed top-0 left-0 flex flex-col bg-black">
 
     <div class="h-1/2 flex flex-col justify-evenly items-center ">
-        <a class="sidebar-icon group" href="/">
+        <a class="sidebar-icon group" href="/" title="Search">
             <span class="material-symbols-outlined">search</span>  
           
         </a>
 
-        <a class='sidebar-icon' href="/">
+        <a class='sidebar-icon group/home relative' href="/" title="Home page">
             <span class="material-symbols-outlined">home</span>
         </a>
-        <a class='sidebar-icon' href="/">
+         <a class='sidebar-icon' href="/trails/all" title="All trails">
+            <span class="material-symbols-outlined">apps</span>
+        </a>
+        <a class='sidebar-icon group' href="/user/login" title="login">
             <span class="material-symbols-outlined">login</span>
         </a>
       
 
     </div>
     <div class="h-1/2 flex flex-col justify-evenly items-center ">
-          <a class='sidebar-icon' href="/newTrail">
+        <a class='sidebar-icon' href="/newTrail" title="New trail">
             <span class="material-symbols-outlined">add_box</span>
         </a>
+          <!-- <a class='sidebar-icon' href="/">
+            <span class="material-symbols-outlined">edit</span>
+        </a> -->
     </div>
 
 </nav>
