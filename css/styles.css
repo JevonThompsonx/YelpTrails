@@ -6,16 +6,6 @@
     .sidebar-icon {
         @apply relative flex items-center justify-center 
         h-12 w-12 aspect-square text-green-950 bg-white
-        rounded-xl
-    }
-    .sidebar-icon:hover {
-        @apply rounded-3xl transition-all duration-200 ease-linear
-    }
-    .sidebar-tooltip {
-        @apply absolute w-auto p-2 m-2
-         min-w-max left-14 rounded-md shadow-md 
-         text-white bg-gray-900
-         text-md font-bold transition-all duration-100 
-         origin-left scale-0 
+        rounded-xl hover:rounded-3xl transition-all duration-200 ease-linear
     }
 }
