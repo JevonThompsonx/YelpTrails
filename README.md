@@ -1,2 +1,2 @@
-# [YelpTrails](https:example.com) ⛰️🧗  
+# [YelpTrails](https://example.com) ⛰️🧗  
 
