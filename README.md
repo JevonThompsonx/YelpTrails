@@ -1,3 +1,2 @@
-# YelpTrails ⛰️🧗  
+# [YelpTrails](Link Here.com) ⛰️🧗  
 
-(Link)[example.com]
