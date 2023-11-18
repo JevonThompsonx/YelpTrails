@@ -14,6 +14,11 @@ const userSchema = new Schema({
         type: [String],
         required: true,
         default: []
+    },
+    role: {
+        type: ['user', 'admin'],
+        required: true,
+        default: 'user'
     }
 });
 const user = mongoose.model('user', userSchema);

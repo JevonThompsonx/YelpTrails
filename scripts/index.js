@@ -1,11 +1,14 @@
 import express from 'express';
 import path from 'path';
+//@ts-ignore
+import engine from 'ejs-mate';
 import { trail } from './models/index.js';
 import connectionString from './connectionString.js';
 import tagTypes from './seeds/seedData/tagTypes.js';
 import fileDirName from './file-dir-name.js';
-const { __dirname, __filename } = fileDirName(import.meta);
-const app = express();
+const { __dirname, __filename } = fileDirName(import.meta), app = express();
+//layout
+app.engine('ejs', engine);
 app.use(express.static(path.join(__dirname, '../')));
 //form parse
 app.use(express.urlencoded({
@@ -27,28 +30,22 @@ app.get('/trails/all', async (req, res) => {
     res.render('trails/all', { pageName, allTrails });
 });
 app.get('/trails/:id', async (req, res) => {
-    const { id: trailId } = req.params;
-    const singleTrail = await trail.findById(trailId);
-    const pageName = singleTrail?.name;
+    const { id: trailId } = req.params, singleTrail = await trail.findById(trailId), pageName = singleTrail?.name;
     res.render('trails/single', { singleTrail, pageName });
 });
 app.get('/trails/owners/:id', async (req, res) => {
-    const { id: trailOwnerName } = req.params;
-    const trailsByOwnerName = await trail.find({ owner: trailOwnerName });
-    res.render('trails/byOwnerName', { trailsByOwnerName, trailOwnerName });
+    const { id: trailOwnerName } = req.params, trailsByOwnerName = await trail.find({ owner: trailOwnerName }), pageName = trailOwnerName;
+    res.render('trails/byOwnerName', { trailsByOwnerName, trailOwnerName, pageName });
 });
 app.get('/trails/tags/:id', async (req, res) => {
-    const { id: tag } = req.params;
-    const taggedTrails = await trail.find({ tags: tag });
-    const pageName = `Tags | ${tag}`;
+    const { id: tag } = req.params, taggedTrails = await trail.find({ tags: tag }), pageName = `Tags | ${tag}`;
     res.render('trails/tag', { tag, taggedTrails, pageName });
 });
 app.get('/newTrail', (req, res) => {
     res.render('trails/new', { pageName: 'New Trail', tagTypes });
 });
 app.post('/newTrail', async (req, res) => {
-    const { newTrailName, newTrailOwner, newTrailCity, newTrailState } = req.body;
-    const selectedTags = [];
+    const { newTrailName, newTrailOwner, newTrailCity, newTrailState } = req.body, selectedTags = [];
     for (let potentialTag in req.body) {
         if (req.body[`${potentialTag}`] === 'on') {
             selectedTags.push(potentialTag);
@@ -68,11 +65,7 @@ app.post('/newTrail', async (req, res) => {
     await newTrail.save();
 });
 app.get('/trails/:id/edit', async (req, res) => {
-    const { id: trailId } = req.params;
-    const singleTrail = await trail.findById(trailId);
-    const pageName = singleTrail?.name;
-    const existingTags = (singleTrail?.tags)?.map(tag => tag);
-    const tagTypeDupe = tagTypes.map((tag) => {
+    const { id: trailId } = req.params, singleTrail = await trail.findById(trailId), pageName = singleTrail?.name, existingTags = (singleTrail?.tags)?.map(tag => tag), tagTypeDupe = tagTypes.map((tag) => {
         //@ts-ignore
         if (existingTags.includes(tag) || existingTags === undefined) {
         }
@@ -83,9 +76,7 @@ app.get('/trails/:id/edit', async (req, res) => {
     res.render('trails/edit', { singleTrail, pageName, tagTypeDupe, existingTags });
 });
 app.post('/trails/:id/edit', async (req, res) => {
-    const { id: trailId } = req.params;
-    const { newTrailName, newTrailPrice, newTrailCity, newTrailState } = req.body;
-    const selectedTags = [];
+    const { id: trailId } = req.params, { newTrailName, newTrailPrice, newTrailCity, newTrailState } = req.body, selectedTags = [];
     for (let potentialTag in req.body) {
         if (req.body[`${potentialTag}`] === 'on') {
             selectedTags.push(potentialTag);
@@ -103,8 +94,7 @@ app.post('/trails/:id/edit', async (req, res) => {
     res.redirect(`/trails/${trailId}`);
 });
 app.get('/trails/:id/delete', async (req, res) => {
-    const { id: trailId } = req.params;
-    const deletedTrail = await trail.findById({ trailId });
+    const { id: trailId } = req.params, deletedTrail = await trail.findById({ trailId });
     await trail.deleteOne({ _id: trailId });
     res.redirect('/trails/all');
 });
