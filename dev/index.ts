@@ -118,7 +118,7 @@ app.post('/trails/:id/edit',async (req,res)=> {
 
 app.get('/trails/:id/delete', async(req,res)=> {
         const {id:trailId} = req.params;
-        await trail.deleteOne({id:trailId})
+        await trail.deleteOne({_id:trailId})
         res.redirect('/trails/all')
 })    
 app.get('*',(req,res)=> {
