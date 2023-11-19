@@ -3,9 +3,4 @@
 @tailwind utilities;
 
 @layer components {
-    .sidebar-icon {
-        @apply relative flex items-center justify-center 
-        h-12 w-12 aspect-square text-green-950 bg-white
-        rounded-xl hover:rounded-3xl transition-all duration-200 ease-linear
-    }
 }
