@@ -2,15 +2,20 @@
 export default {
     content: [
         './views/**/*.{ejs,html}',
-        "./node_modules/flowbite/**/*.js"
     ],
     darkMode: 'class',
-    theme: {
-        extend: {
-       
-    }
+    theme : {
+        extend : {
+            colors : {
+                whiteish: '#FFFFFF',
+                limeGreen: '#BADC66',
+                sun: '#FEE791',
+                bloo: '#105157',
+                peach: '#FFBBAC',
+                darkerPeach: '#ffaa96'
+            }
+        }
     },
     plugins: [
-          require('flowbite/plugin')
     ],
 };

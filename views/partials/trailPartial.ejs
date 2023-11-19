@@ -7,7 +7,7 @@
         <div class="flex flex-col h-full ml-5 w-1/2 justify-evenly">
             <div class="flex flex-col h-full">
                 <h2 class="singleTrailName text-2xl lg:text-4xl font-bold py-2 "><%= singleTrail.name %></h2>
-                <a href="/trails/owners/<%=singleTrail.owner%>" class="text-xl lg:text-2xl singleTrailOwner text-blue-800 hover:text-red-800 active:text-violet-800"><%= singleTrail.owner %></a>
+                <a href="/trails/owners/<%=singleTrail.owner%>" class="text-xl lg:text-2xl singleTrailOwner text-blue-800 hover:text-red-800 active:text-bloo"><%= singleTrail.owner %></a>
                 <div class="singleTrailRankAndPrice flex flex-row">
                     <p class="singleTrailRank"><%= singleTrail.rank %></p>
                     <p class="singleTrailPrice text-green-700">$<%= singleTrail.price %></p>
@@ -16,7 +16,7 @@
                     <p class="">Tags:</p>
                     <div class="singleTrailTags flex flex-wrap justify-evenly  overflow-y-scroll py-2 h-12">
                         <% for (let tag of singleTrail.tags ) { %>
-                        <a class="text-blue-800 hover:text-red-800 active:text-violet-800 mr-8"
+                        <a class="text-blue-800 hover:text-red-800 active:text-bloo mr-8"
                             href="/trails/tags/<%=tag%><%=  %>"><%= tag %></a>
 
                         <% } %>
