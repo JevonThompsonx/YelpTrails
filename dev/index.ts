@@ -11,6 +11,9 @@ import fileDirName from './file-dir-name.js';
 const { __dirname, __filename } = fileDirName(import.meta),
 app = express();
 
+import unsplash from './seeds/unsplash.js';
+
+
 //layout
 app.engine('ejs',engine)
 

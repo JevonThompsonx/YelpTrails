@@ -1,4 +1,5 @@
 import seedConnectionString from './seedConnectionString.js';
+import unsplash from './unsplash.js';
 import { trail } from '../models/index.js';
 await seedConnectionString();
 import 'dotenv/config';
@@ -24,14 +25,19 @@ const getFiveTags = () => {
     let tempTagArray = ['Empty'];
     for (let i = 0; tempTagArray.length < 6; i++) {
         let newTag = getRandomTag();
-        if (tempTagArray.includes(newTag)) {
-        }
+        if (tempTagArray.includes(newTag)) { }
         else {
             tempTagArray.push(newTag);
         }
     }
     tempTagArray.shift();
     return tempTagArray;
+};
+const getPhotoFunc = async () => {
+    try {
+        return await unsplash();
+    }
+    catch { }
 };
 const seedCamp = async () => {
     await trail.deleteMany({});
@@ -42,7 +48,8 @@ const seedCamp = async () => {
             owner: getOwnerName(),
             rating: getRandomRating(),
             tags: [...getFiveTags()],
-            location: city
+            location: city,
+            photoUrl: await getPhotoFunc()
         });
         //@ts-ignore
         await newCity.save();
@@ -51,6 +58,7 @@ const seedCamp = async () => {
 const deleteCampData = async () => await trail.deleteMany();
 // await deleteCampData()
 await seedCamp();
+console.log(await unsplash().then(data => data).catch(err => err));
 console.log(await trail.find({})
     //@ts-ignore
     .then(data => console.log(data))

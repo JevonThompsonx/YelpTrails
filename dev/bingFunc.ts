@@ -85,5 +85,4 @@ const searchTerms = [
 const getRandomInt = (max:number):number => {
   return Math.floor(Math.random() * 33);
 }
-console.log(await bingFunc('hiking trails'))
-// export {bingFunc, searchTerms,getRandomInt}
+export {bingFunc, searchTerms,getRandomInt}

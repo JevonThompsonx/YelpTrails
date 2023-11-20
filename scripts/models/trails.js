@@ -39,6 +39,11 @@ const trailSchema = new Schema({
         type: String,
         required: false,
         default: "⭐⭐⭐"
+    },
+    photoUrl: {
+        type: String,
+        required: false,
+        default: 'https://images.unsplash.com/photo-1459231978203-b7d0c47a2cb7?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     }
 });
 const trail = mongoose.model('trail', trailSchema);
