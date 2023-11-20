@@ -1,6 +1,6 @@
 import seedConnectionString from './seedConnectionString.js';
-import unsplash from './unsplash.js';
 import { trail } from '../models/index.js';
+import photo from '../models/photos.js';
 await seedConnectionString();
 import 'dotenv/config';
 const randomNumberGenerator = (max) => Math.floor(Math.random() * max);
@@ -21,9 +21,9 @@ const getRandomRating = () => {
 const getRandomTag = () => {
     return tagTypes[randomNumberGenerator(tagTypes.length)];
 };
-const getFiveTags = () => {
+const getFourTags = () => {
     let tempTagArray = ['Empty'];
-    for (let i = 0; tempTagArray.length < 6; i++) {
+    for (let i = 0; tempTagArray.length < 5; i++) {
         let newTag = getRandomTag();
         if (tempTagArray.includes(newTag)) { }
         else {
@@ -33,11 +33,12 @@ const getFiveTags = () => {
     tempTagArray.shift();
     return tempTagArray;
 };
-const getPhotoFunc = async () => {
-    try {
-        return await unsplash();
+const randomUnsplashImage = async () => {
+    const photoObjectResults = await photo.find(), allLinks = [];
+    for (const singlePhoto of photoObjectResults) {
+        allLinks.push(singlePhoto.link);
     }
-    catch { }
+    return allLinks[randomNumberGenerator(allLinks.length)];
 };
 const seedCamp = async () => {
     await trail.deleteMany({});
@@ -47,9 +48,9 @@ const seedCamp = async () => {
             price: randomNumberGenerator(100),
             owner: getOwnerName(),
             rating: getRandomRating(),
-            tags: [...getFiveTags()],
+            tags: [...getFourTags()],
             location: city,
-            photoUrl: await getPhotoFunc()
+            photoUrl: await randomUnsplashImage()
         });
         //@ts-ignore
         await newCity.save();
@@ -58,30 +59,22 @@ const seedCamp = async () => {
 const reSeedCamp = async () => {
     const allTrails = await trail.find();
     for (let singleTrail of allTrails) {
-        try {
-            if (singleTrail.photoUrl === 'https://images.unsplash.com/photo-1459231978203-b7d0c47a2cb7?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') {
-                await trail.updateOne({
-                    _id: singleTrail._id
-                }, {
-                    photoUrl: unsplash()
-                });
-                console.log('updated');
-            }
-            else {
-            }
-        }
-        catch {
-            console.log('Unsplash Prob done for the day');
+        if (singleTrail.photoUrl === 'https://images.unsplash.com/photo-1574009709841-7e4781f5afef?ixid=M3w1MjEzNzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDA1MjAyMjB8&ixlib=rb-4.0.3' || singleTrail.photoUrl === 'https://images.unsplash.com/photo-1465311354905-789ff5f7a457?ixid=M3w1MjEzNzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDA1MTU2MTR8&ixlib=rb-4.0.3' || singleTrail.photoUrl === 'https://images.unsplash.com/photo-1465188035480-cf3a60801ea5?ixid=M3w1MjEzNzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDA1MTU2MTh8&ixlib=rb-4.0.3') {
+            await trail.updateOne({
+                _id: singleTrail._id
+            }, {
+                photoUrl: await randomUnsplashImage()
+            });
+            console.log('updated');
         }
     }
+    console.log('done');
 };
 const deleteCampData = async () => await trail.deleteMany();
 // await deleteCampData()
 // await seedCamp()
 await reSeedCamp();
-console.log(await unsplash().then(data => data).catch(err => err));
-console.log(await trail.find({})
-    //@ts-ignore
-    .then(data => console.log(data))
-    //@ts-ignore
-    .catch(err => console.log(err)));
+// console.log(await trail.find({})
+//     .then(data => console.log(data))
+//     .catch(err => console.log(err))
+// )
