@@ -3,16 +3,12 @@ import path from 'path';
 import ejs from 'ejs';
 //@ts-ignore
 import engine from 'ejs-mate'
-import {trail,user,comment, trailSchema} from './models/index.js';
+import {trail} from './models/index.js';
 import connectionString from './connectionString.js';
 import tagTypes from './seeds/seedData/tagTypes.js';
-
-import fileDirName from './file-dir-name.js'; 
+import fileDirName from './setup/file-dir-name.js'; 
 const { __dirname, __filename } = fileDirName(import.meta),
 app = express();
-
-import unsplash from './seeds/unsplash.js';
-
 
 //layout
 app.engine('ejs',engine)

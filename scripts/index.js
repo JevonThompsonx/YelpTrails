@@ -5,7 +5,7 @@ import engine from 'ejs-mate';
 import { trail } from './models/index.js';
 import connectionString from './connectionString.js';
 import tagTypes from './seeds/seedData/tagTypes.js';
-import fileDirName from './file-dir-name.js';
+import fileDirName from './setup/file-dir-name.js';
 const { __dirname, __filename } = fileDirName(import.meta), app = express();
 //layout
 app.engine('ejs', engine);
