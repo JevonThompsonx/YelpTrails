@@ -18,7 +18,7 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 //sets view folder as '/views'
 app.set('views', path.join(__dirname, '../views'));
-const port = 8080;
+const port = process.env.PORT || 8080;
 app.listen(port, () => { console.log(`Listening on port ${port}`); });
 await connectionString();
 app.get('/', (req, res) => {
