@@ -12,7 +12,7 @@ export default {
                 sun: '#FEE791',
                 bloo: '#105157',
                 peach: '#FFBBAC',
-                darkerPeach: '#ffaa96'
+                darkerPeach: '#ff9a83'
             }
         }
     },
