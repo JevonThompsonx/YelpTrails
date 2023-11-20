@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate_noFoot') %>
 
-<section class="h-5/6 w-full flex flex-col items-center my-auto">
+<main class="h-screen w-full flex flex-col items-center space-y-8">
     <h1 class="text-7xl mt-10"> <i><%= tag %></i>  Trails</h1>
     <div class="h-full w-full flex flex-wrap justify-evenly items-center">
         <% for (let taggedTrail of taggedTrails ) { %>
@@ -9,5 +9,5 @@
     </div>
 
 
-</section>
+</main>
 

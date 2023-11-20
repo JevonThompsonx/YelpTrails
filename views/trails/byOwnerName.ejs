@@ -1,12 +1,12 @@
 <% layout('layouts/boilerplate_noFoot') %>
 
-   <div class="h-full w-full flex flex-col justify-evenly items-center p-5">
-    <h1 class="text-7xl"><%= trailOwnerName %>'s trails: </h1>
-     <main class="h-full w-full flex justify-evenly flex-wrap">
+<main class="h-screen w-full flex flex-col items-center space-y-8">
+    
+    <h1 class="text-7xl my-12"><%= trailOwnerName %>'s trails: </h1>
+    <div class="h-full w-full flex flex-wrap justify-evenly items-center pb-4">
        <% for (let trailByOwnersName of trailsByOwnerName) { %>
         <%- include('../partials/trailPartial.ejs',{singleTrail: trailByOwnersName}) %>
        <% } %>
-   </main>
    </div>
+   </main>
   
-
