@@ -57,7 +57,7 @@ const getFiveTags = (): [String] => {
 const getPhotoFunc = async () => {
     try {
         return await unsplash();
-    } catch { }
+    } catch {}
 }
 const seedCamp = async () => {
     await trail.deleteMany({})
@@ -69,18 +69,43 @@ const seedCamp = async () => {
             rating: getRandomRating(),
             tags: [...getFiveTags()],
             location: city,
-            photoUrl: await getPhotoFunc() 
+            photoUrl: await getPhotoFunc()
         })
         //@ts-ignore
         await newCity.save();
     }
 
 }
+
+const reSeedCamp = async () => {
+    const allTrails = await trail.find()
+    for (let singleTrail of allTrails) {
+        try {
+            if (singleTrail.photoUrl === 'https://images.unsplash.com/photo-1459231978203-b7d0c47a2cb7?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') {
+                await trail.updateOne({
+                    _id: singleTrail._id
+                }, {
+                    photoUrl: unsplash()
+                })
+                console.log('updated')
+            } else {
+
+            }
+        } catch {
+            console.log('Unsplash Prob done for the day')
+        }
+
+    }
+}
+
+
 const deleteCampData = async () => await trail.deleteMany();
 
 
 // await deleteCampData()
-await seedCamp()
+// await seedCamp()
+await reSeedCamp();
+
 console.log(await unsplash().then(data => data).catch(err => err))
 console.log(await trail.find({})
     //@ts-ignore
