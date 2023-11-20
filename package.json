@@ -5,6 +5,7 @@
   "main": "scripts/index.js",
   "type": "module",
   "scripts": {
+    "start": "node scripts/index.js",
     "node": "nodemon .ejs .js .css",
     "tailwind": "npx tailwindcss -i ./css/styles.css -o ./css/output.css --watch",
     "tsConvert": "tsc -w",
