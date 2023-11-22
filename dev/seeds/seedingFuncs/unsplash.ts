@@ -7,7 +7,7 @@ export default async ()=> {
     const splashData:any = await axios.get(
     `https://api.unsplash.com/photos/random`,
     {   params: {
-        collections: '78796998,3561787,910710,1789878,1181817,2367744,fVjCokXCrm8',
+        collections: '2110747,1753565',
         orientation: 'squarish'
     },
           headers: {

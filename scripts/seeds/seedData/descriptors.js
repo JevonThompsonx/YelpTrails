@@ -1,6 +1,3 @@
-//chatGPT generated
-//Prompt: 
-//Give me a javascript array of descriptive words that can be used to name hiking trails
 export default [
     "Scenic",
     "Rugged",

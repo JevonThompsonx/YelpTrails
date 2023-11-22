@@ -1,43 +1,46 @@
-<div class="content-wrapper h-full w-full flex justify-center items-center text-md">
+<div class="content-wrapper flex justify-center items-center my-12 w-full h-fit">
     <section
-        class="lg:max-w-5xl  md:max-w-2xl md:min-w-[600px] md:h-auto md:aspect-[3/1.5]  h-4/6 w-auto aspect-[9/16] flex md:flex-row flex-col items-center justify-between border-black shadow-2xl shadow-yellow-950 rounded-lg overflow-hidden">
-        <img class="h-full aspect-auto w-auto md:w-1/2 md:h-auto" alt="" src="<%= singleTrail.photoUrl %>">
+    class="flex md:flex-row md:items-center md:justify-between lg:max-w-7xl md:max-w-3xl md:min-w-[600px] md:h-auto md:aspect-[3/1.5]  max-w-sm w-5/6 min-w-[280px] h-auto aspect-[1.2/3] flex-col  border-black shadow-2xl shadow-yellow-950 rounded-lg overflow-hidden">
+        <img class="aspect-auto md:w-1/2 md:h-auto h-1/2 w-full" alt="" src="<%= singleTrail.photoUrl %>">
         <!-- <img class="w-1/2 h-auto aspect-auto" alt="" src="https://images.unsplash.com/photo-1669400947117-9e3d46aba4ad?auto=format&fit=crop&q=80&w=1374&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"> -->
         <!-- <img src="" alt="Image of singleTrail.name singleTrail" srcset="<%# have a list of 3 image sources here from db %>"> -->
-        <div class="flex flex-col h-full ml-5 w-1/2 space-y-4 py-4">
-            <div class="flex flex-col h-full justify-evenly">
-                <h2 class="singleTrailName text-2xl lg:text-4xl font-bold py-2 "><%= singleTrail.name %></h2>
-                <a href="/trails/owners/<%=singleTrail.owner%>" class="text-xl lg:text-2xl singleTrailOwner text-blue-800 hover:text-red-800 active:text-bloo"><%= singleTrail.owner %></a>
+        <div class="flex flex-col md:h-full md:w-1/2 lg:space-y-4 h-1/2 w-full p-4 ">
+            <div class="flex flex-col justify-evenly">
+                <h2 class="singleTrailName font-bold "><%= singleTrail.name %></h2>
+                <h3> <a href="/trails/owners/<%=singleTrail.owner%>" class="singleTrailOwner text-blue-800 hover:text-red-800 active:text-bloo"><%= singleTrail.owner %></a> </h3> 
                 <div class="singleTrailRankAndPrice flex">
                     <p class="singleTrailRank"><%= singleTrail.rank %></p>
                     <p class="singleTrailPrice text-green-700">$<%= singleTrail.price %></p>
                 </div>
                
             </div>
-             <div class="singleTrailTagDiv flex flex-col justify-evenly">
-                    <p class="">Tags:</p>
-                    <div class="singleTrailTags flex flex-wrap justify-evenly py-2">
+             <div class="singleTrailTagDiv flex flex-col justify-evenly w-full">
+                    <h4 class="">Tags:</h4>
+                    <div class="singleTrailTags flex flex-wrap justify-evenly space-x-2">
                         <% for (let tag of singleTrail.tags ) { %>
-                        <a class="text-blue-800 hover:text-red-800 active:text-bloo"
+                        <h5>
+                                    <a class="text-blue-800 hover:text-red-800 active:text-bloo"
                             href="/trails/tags/<%=tag%><%=  %>"><%= tag %></a>
+                        </h5>
+                 
 
                         <% } %>
                     </div>
 
                 </div>
-            <div class="details h-3/5">
-                <h3 class="text-lg">Details:</h3>
-                <p class="h-4/5 overflow-y-scroll border border-green-900 border-opacity-20 p-0.5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates id totam officiis aperiam facere animi saepe. Optio vitae cumque itaque atque quisquam animi amet modi magnam id obcaecati quod aspernatur rerum voluptates sint temporibus exercitationem, alias soluta ratione. Veniam, earum!</p>
+            <div class="details flex flex-col justify-evenly">
+                <h4 class="">Details:</h4>
+                <p class="overflow-y-scroll border border-green-900 border-opacity-20 p-0.5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates id totam officiis aperiam facere animi saepe. Optio vitae cumque itaque atque quisquam animi amet modi magnam id obcaecati quod aspernatur rerum voluptates sint temporibus exercitationem, alias soluta ratione. Veniam, earum!</p>
             </div>
             <div class="button-home flex w-full justify-evenly items-center py-2">
  <a href="/trails/<%= singleTrail.id %>"
-                class="min-w-[100px] max-w-[150px] border-solid border border-opacity-20 border-stone-950 rounded shadow-sm p-1 text-black hover:bg-green-700 flex justify-center items-center">Visit
+                class="min-w-[100px] max-w-[150px] border-solid border border-opacity-20 border-stone-950 rounded shadow-sm p-1 text-black hover:bg-green-700 hover:text-white flex justify-center items-center">Visit
             </a>
               <a href="/trails/<%=singleTrail._id%>/edit"
-                class="min-w-[100px] max-w-[150px] border-solid border border-opacity-20 border-stone-950 rounded shadow-sm p-1 text-black hover:bg-green-700 flex justify-center items-center">Edit
+                class="min-w-[100px]  max-w-[150px] border-solid border border-opacity-20 border-stone-950 rounded shadow-sm p-1 text-black hover:bg-green-700 hover:text-white flex justify-center items-center">Edit
             </a>
             <a href="/trails/<%=singleTrail._id%>/delete"
-                class="min-w-[100px] max-w-[150px] border-solid border border-opacity-20 border-stone-950 rounded shadow-sm p-1 text-black hover:bg-green-700 flex justify-center items-center">Delete
+                class="min-w-[100px]  max-w-[150px] border-solid border border-opacity-20 border-stone-950 rounded shadow-sm p-1 text-black hover:bg-green-700 hover:text-white flex justify-center items-center">Delete
             </a>
 
             </div>

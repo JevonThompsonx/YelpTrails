@@ -1,22 +1,18 @@
 import express from 'express';
 import path from 'path';
-//@ts-ignore
 import engine from 'ejs-mate';
 import { trail } from './models/index.js';
 import connectionString from './connectionString.js';
 import tagTypes from './seeds/seedData/tagTypes.js';
 import fileDirName from './setup/file-dir-name.js';
 const { __dirname, __filename } = fileDirName(import.meta), app = express();
-//layout
 app.engine('ejs', engine);
 app.use(express.static(path.join(__dirname, '../')));
-//form parse
 app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
 app.set('view engine', 'ejs');
-//sets view folder as '/views'
 app.set('views', path.join(__dirname, '../views'));
 const port = process.env.PORT || 8080;
 app.listen(port, () => { console.log(`Listening on port ${port}`); });
@@ -66,7 +62,6 @@ app.post('/newTrail', async (req, res) => {
 });
 app.get('/trails/:id/edit', async (req, res) => {
     const { id: trailId } = req.params, singleTrail = await trail.findById(trailId), pageName = singleTrail?.name, existingTags = (singleTrail?.tags)?.map(tag => tag), tagTypeDupe = tagTypes.map((tag) => {
-        //@ts-ignore
         if (existingTags.includes(tag) || existingTags === undefined) {
         }
         else {

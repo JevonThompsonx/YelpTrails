@@ -1,83 +1,30 @@
-import mongoose from 'mongoose'
 import seedConnectionString from './seedConnectionString.js'
-import {
-    trail
-} from '../models/index.js';
+import {trail} from '../models/index.js';
+import {cities} from './seedData/index.js'
 
-import photo from '../models/photos.js';
+import randNumGen from './seedingFuncs/randNumGen.js'
+import getRandOwnerName from './seedingFuncs/getRandOwnerName.js';
+import getRandRating from './seedingFuncs/getRandRating.js';
+import getRandCampName from './seedingFuncs/getRandCampName.js';
+import getFourTags from './seedingFuncs/getFourTags.js';
+import getRandUnsplashImage from './seedingFuncs/getRandUnsplashImage.js';
 
 await seedConnectionString();
-import 'dotenv/config';
 
-const randomNumberGenerator = (max: number): number => Math.floor(Math.random() * max);
-
-import {
-    descriptors,
-    places,
-    ratings,
-    tagTypes,
-    cities
-} from './seedData/index.js'
-
-const getCampName = (): string => {
-    const descriptorArrayLength = descriptors.length
-    const randomDescriptor = descriptors[randomNumberGenerator(descriptorArrayLength)]
-    const placesArrayLength = places.length
-    const randomPlace = places[randomNumberGenerator(placesArrayLength)]
-    return `${randomDescriptor} ${randomPlace} `
-}
-
-import Chance from 'chance';
-const chance = new Chance();
-const getOwnerName = (): String => chance.name()
-
-const getRandomRating = (): String => {
-    return ratings[randomNumberGenerator(ratings.length)]
-}
-
-const getRandomTag = (): String => {
-    return tagTypes[randomNumberGenerator(tagTypes.length)]
-}
-
-const getFourTags = (): [String] => {
-    let tempTagArray: [String] = ['Empty'];
-
-    for (let i = 0; tempTagArray.length < 5; i++) {
-        let newTag = getRandomTag();
-        if (tempTagArray.includes(newTag)) {} else {
-            tempTagArray.push(newTag)
-        }
-    }
-    tempTagArray.shift();
-
-    return tempTagArray
-}
-
-
-
-const randomUnsplashImage = async ()=> {
-    const photoObjectResults = await photo.find(),
-    allLinks = []
-    for (const singlePhoto of photoObjectResults) {
-        allLinks.push(singlePhoto.link)
-    }
-    return allLinks[randomNumberGenerator(allLinks.length)]
-}
-
+const deleteCampData = async () => await trail.deleteMany();
 
 const seedCamp = async () => {
     await trail.deleteMany({})
     for (let city of cities) {
-        const newCity: object = new trail({
-            name: getCampName(),
-            price: randomNumberGenerator(100),
-            owner: getOwnerName(),
-            rating: getRandomRating(),
+        const newCity = new trail({
+            name: getRandCampName(),
+            price: randNumGen(100),
+            owner: getRandOwnerName(),
+            rating: getRandRating(),
             tags: [...getFourTags()],
             location: city,
-            photoUrl: await randomUnsplashImage()
+            photoUrl: await getRandUnsplashImage()
         })
-        //@ts-ignore
         await newCity.save();
     }
 
@@ -92,7 +39,7 @@ const reSeedCamp = async () => {
            await trail.updateOne({
                     _id: singleTrail._id
                 }, {
-                    photoUrl: await randomUnsplashImage()
+                    photoUrl: await getRandUnsplashImage()
                 })
         console.log('updated')
     }
@@ -100,12 +47,7 @@ const reSeedCamp = async () => {
   console.log('done')
 }
 
-
-
-const deleteCampData = async () => await trail.deleteMany();
-
-
-// await deleteCampData()
+// await deleteAllCampData()
 // await seedCamp()
 await reSeedCamp();
 

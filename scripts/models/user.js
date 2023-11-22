@@ -9,7 +9,6 @@ const userSchema = new Schema({
         type: Date,
         required: true
     },
-    // age: (new Date - birthDay),
     comments: {
         type: [String],
         required: true,
