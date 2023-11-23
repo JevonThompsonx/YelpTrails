@@ -665,6 +665,10 @@ video {
   max-height: 80%;
 }
 
+.max-h-\[90\%\] {
+  max-height: 90%;
+}
+
 .min-h-fit {
   min-height: -moz-fit-content;
   min-height: fit-content;
@@ -740,6 +744,14 @@ video {
 
 .max-w-sm {
   max-width: 24rem;
+}
+
+.max-w-\[0\%\] {
+  max-width: 0%;
+}
+
+.max-w-\[90\%\] {
+  max-width: 90%;
 }
 
 .flex-col {
