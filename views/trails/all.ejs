@@ -1,12 +1,16 @@
-<% layout('layouts/boilerplate_noFoot') %>
+<% layout('layouts/boilerplate') %>
 
-<main class="h-screen w-full flex flex-col items-center space-y-8">
+<main class="h-fit w-full flex flex-col items-center space-y-8" id="allDiv">
 
     <h1 class="text-7xl mt-8">All trails</h1>
     <div class="h-full w-full flex flex-wrap justify-evenly items-center">
-    <% for (let singleTrail of allTrails ) { %>
+        <% for (let singleTrail of allTrails ) { %>
 
-                <%- include('../partials/trailPartial.ejs',{singleTrail}) %>
-    <% } %>
-        </div>
+        <%- include('../partials/trailPartial.ejs',{singleTrail}) %>
+        <% } %>
+    </div>
+
+
+    </div>
+
 </main>
