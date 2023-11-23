@@ -1,9 +1,7 @@
 <div class="content-wrapper justify-center items-center my-12 w-full h-fit lg:text-lg md:text-sm text-base singleTrail hidden">
     <section
         class="flex md:flex-row md:items-center md:justify-between lg:max-w-7xl md:min-w-[700px] md:h-auto md:aspect-[3/1.5]  max-w-sm w-5/6 min-w-[280px] h-auto aspect-[1.2/3] flex-col  border-black shadow-2xl shadow-yellow-950 rounded-lg">
-        <img class="aspect-auto md:w-1/2 md:h-auto h-1/2 w-full" alt="" src="<%= singleTrail.photoUrl %>">
-        <!-- <img class="w-1/2 h-auto aspect-auto" alt="" src="https://images.unsplash.com/photo-1669400947117-9e3d46aba4ad?auto=format&fit=crop&q=80&w=1374&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"> -->
-        <!-- <img src="" alt="Image of singleTrail.name singleTrail" srcset="<%# have a list of 3 image sources here from db %>"> -->
+        <img class="aspect-square md:w-1/2 md:h-auto h-2/5  w-full" alt="" src="<%= singleTrail.photoUrl %>">
         <div class="flex flex-col justify-evenly md:h-full md:w-1/2 h-3/5 w-full px-2 py-4">
             <div class="flex flex-col justify-evenly">
                 <h2 class="singleTrailName font-bold lg:text-4xl md:text-2xl text-3xl min-h-fit "><%= singleTrail.name %></h2>
