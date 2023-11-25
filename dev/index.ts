@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { ErrorRequestHandler, NextFunction, Request, Response } from 'express'
 import path from 'path';
 import ejs from 'ejs';
 //@ts-ignore
@@ -7,6 +7,7 @@ import {trail} from './models/index.js';
 import connectionString from './connectionString.js';
 import tagTypes from './seeds/seedData/tagTypes.js';
 import fileDirName from './setup/file-dir-name.js'; 
+import AppError from './error_handling/AppError.js';
 const { __dirname, __filename } = fileDirName(import.meta),
 app = express();
 
@@ -128,7 +129,23 @@ app.get('/trails/:id/delete', async(req,res)=> {
         deletedTrail = await trail.findById({trailId})
         await trail.deleteOne({_id:trailId})
         res.redirect('/trails/all')
-})    
-app.get('*',(req,res)=> {
-    res.render('unknownPage',{pageName:'Unknown page'});
+})   
+
+
+app.get('/adminLogin/:id',(req,res)=> {
+    const {id:password} = req.params
+    if (password != 'toeBeans') {
+        throw new AppError('Incorrect password',403)
+    } else (
+        res.send('Login worked!!')
+    )
+})
+
+app.get('*',(req,res)=>{
+    throw new AppError('Page not found',404)   
+})
+
+app.use((err: ErrorRequestHandler,req: Request,res: Response,next: NextFunction)=> {
+    next(err)
 });
+

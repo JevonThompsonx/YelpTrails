@@ -6,18 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YelpTrails | <%= pageName %></title>
   <link rel="stylesheet" href="/css/output.css">
-  	<meta name="theme-color" content="#105157" />
-
-
+	<meta name="theme-color" content="#105157" />
+  <meta name="description" content="Hiking trail review site by Jevon Thompson/WebDevJev">
 <script src="https://kit.fontawesome.com/e823734a38.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="min-h-fit overflow-x-hidden">
+<body class="h-screen w-screen overflow-x-hidden">
   <%- include('../partials/nav.ejs') %>
 
   <%- body %>
 
-  <script src="/scripts/nav.js"></script>
+  <%- include('../partials/footer.ejs') %>
+  <!-- <script src="/scripts/nav.js"></script> -->
 
 </body>
 

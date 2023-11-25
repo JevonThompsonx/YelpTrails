@@ -4,7 +4,6 @@ btn?.addEventListener('click', () => {
     menu?.classList.toggle('hidden');
 });
 const theWholePage = document.querySelector('#allDiv'), allDivs = document.querySelectorAll('.singleTrail');
-console.log(allDivs);
 let locationNumber = 9, firstDiv = 15, endDiv = 25;
 const loadDivs = (initial, max) => {
     for (let index = initial; index < max; index++) {
