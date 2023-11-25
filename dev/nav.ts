@@ -5,6 +5,7 @@ btn?.addEventListener('click', ()=> {
     menu?.classList.toggle('hidden')
 })
 
+
 const theWholePage = document.querySelector('#allDiv'),
 allDivs:NodeListOf<HTMLDivElement> = document.querySelectorAll('.singleTrail')
 
@@ -35,3 +36,4 @@ onLoadLoadDivs = ()=> { window.addEventListener('DOMContentLoaded',()=> {
 }
 onLoadLoadDivs();
 document.addEventListener('scroll',loadMore);
+
