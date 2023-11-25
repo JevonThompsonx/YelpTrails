@@ -1,15 +1,16 @@
-FROM node:18
-
+FROM node:lts
+RUN apt-get update && apt-get install -y --no-install-recommends dumb-init
+ENV NODE_ENV production
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install 
+RUN npm ci --only=production
 
-COPY . . 
+COPY --chown=node:node . .
 
 ENV PORT=8080
 
 EXPOSE 8080 
-
-CMD [ "npm", "start" ]
+USER node
+CMD ["dumb-init", "node", "index.js"]
