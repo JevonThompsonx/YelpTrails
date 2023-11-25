@@ -1,10 +1,9 @@
-import mongoose from 'mongoose'
-import {trail,user,comment} from '../models/index.js'
-import seedConnectionString from './seedConnectionString.js'
+import mongoose from "mongoose";
+import { trail, user, comment } from "../models/index.js";
+import seedConnectionString from "./seedConnectionString.js";
 await seedConnectionString();
 
 //test used to check succesful connection to db
-
 
 // await trail.insertMany([{
 //     name: 'Ye ole trail',
@@ -45,4 +44,7 @@ await seedConnectionString();
 // }
 // ]).then(()=>console.log('succesful')).catch((e)=>console.log(e))
 
-await trail.find().then(data=>console.log(data)).catch(err=>console.log(err))
+await trail
+	.find()
+	.then((data) => console.log(data))
+	.catch((err) => console.log(err));

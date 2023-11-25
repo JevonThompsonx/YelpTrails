@@ -1,5 +1,5 @@
-import { descriptors, places } from '../seedData/index.js';
-import randNumGen from './randNumGen.js';
+import { descriptors, places } from "../seedData/index.js";
+import randNumGen from "./randNumGen.js";
 export default () => {
     const descriptorArrayLength = descriptors.length;
     const randDescriptor = descriptors[randNumGen(descriptorArrayLength)];

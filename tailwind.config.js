@@ -15,7 +15,11 @@ export default {
                 bloo: '#105157',
                 peach: '#FFBBAC',
                 darkerPeach: '#ff9a83'
-            }
+            },
+            backgroundImage: {
+                '404': "url('/images/undraw_page_not_found.svg')",
+                '500': "url('/images/undraw_server_down.svg')"
+      }
         }
     },
     plugins: [

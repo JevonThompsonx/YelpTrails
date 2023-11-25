@@ -1,12 +1,12 @@
-import seedConnectionString from './seedConnectionString.js';
-import { trail } from '../models/index.js';
-import { cities } from './seedData/index.js';
-import randNumGen from './seedingFuncs/randNumGen.js';
-import getRandOwnerName from './seedingFuncs/getRandOwnerName.js';
-import getRandRating from './seedingFuncs/getRandRating.js';
-import getRandCampName from './seedingFuncs/getRandCampName.js';
-import getFourTags from './seedingFuncs/getFourTags.js';
-import getRandUnsplashImage from './seedingFuncs/getRandUnsplashImage.js';
+import seedConnectionString from "./seedConnectionString.js";
+import { trail } from "../models/index.js";
+import { cities } from "./seedData/index.js";
+import randNumGen from "./seedingFuncs/randNumGen.js";
+import getRandOwnerName from "./seedingFuncs/getRandOwnerName.js";
+import getRandRating from "./seedingFuncs/getRandRating.js";
+import getRandCampName from "./seedingFuncs/getRandCampName.js";
+import getFourTags from "./seedingFuncs/getFourTags.js";
+import getRandUnsplashImage from "./seedingFuncs/getRandUnsplashImage.js";
 await seedConnectionString();
 const deleteCampData = async () => await trail.deleteMany();
 const seedCamp = async () => {
@@ -19,7 +19,7 @@ const seedCamp = async () => {
             rating: getRandRating(),
             tags: [...getFourTags()],
             location: city,
-            photoUrl: await getRandUnsplashImage()
+            photoUrl: await getRandUnsplashImage(),
         });
         await newCity.save();
     }
@@ -28,12 +28,12 @@ const randImageSeed = async () => {
     const allTrails = await trail.find();
     for (let singleTrail of allTrails) {
         await trail.updateOne({
-            _id: singleTrail._id
+            _id: singleTrail._id,
         }, {
-            photoUrl: await getRandUnsplashImage()
+            photoUrl: await getRandUnsplashImage(),
         });
-        console.log('updated');
+        console.log("updated");
     }
-    console.log('done');
+    console.log("done");
 };
 await randImageSeed();

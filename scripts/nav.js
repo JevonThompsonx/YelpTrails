@@ -1,18 +1,18 @@
 "use strict";
-const btn = document.querySelector('.mobile-menu-button'), menu = document.querySelector('.mobile-menu');
-btn?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
+const btn = document.querySelector(".mobile-menu-button"), menu = document.querySelector(".mobile-menu");
+btn?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
 });
-const theWholePage = document.querySelector('#allDiv'), allDivs = document.querySelectorAll('.singleTrail');
+const theWholePage = document.querySelector("#allDiv"), allDivs = document.querySelectorAll(".singleTrail");
 let locationNumber = 9, firstDiv = 15, endDiv = 25;
 const loadDivs = (initial, max) => {
     for (let index = initial; index < max; index++) {
         let singleDiv = allDivs[index];
-        singleDiv.classList.toggle('hidden');
-        singleDiv.classList.toggle('flex');
+        singleDiv.classList.toggle("hidden");
+        singleDiv.classList.toggle("flex");
     }
 }, onLoadLoadDivs = () => {
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener("DOMContentLoaded", () => {
         loadDivs(0, 15);
     });
 }, loadMore = () => {
@@ -25,4 +25,4 @@ const loadDivs = (initial, max) => {
     }
 };
 onLoadLoadDivs();
-document.addEventListener('scroll', loadMore);
+document.addEventListener("scroll", loadMore);

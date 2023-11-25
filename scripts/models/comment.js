@@ -1,19 +1,19 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 const commentSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     posted: {
         type: Date,
         required: true,
-        default: new Date
+        default: new Date(),
     },
     text: {
         type: String,
-        require: true
-    }
+        require: true,
+    },
 });
-const comment = mongoose.model('comment', commentSchema);
+const comment = mongoose.model("comment", commentSchema);
 export { comment, commentSchema };

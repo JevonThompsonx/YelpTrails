@@ -201,10 +201,12 @@ app.get("/adminLogin/:id", (req, res) => {
         res.send("Login worked!!");
 });
 app.get("*", (req, res) => {
+    console.log("Got to base error");
     throw new AppError("Page not found", 404);
 });
 app.use((err, req, res, next) => {
+    console.log("Got to final error");
     const { status = 500, message = "Something went wrong" } = err;
-    res.render('error', { status, message });
+    res.render("error", { status, message, pageName: "Error" });
     next(err);
 });

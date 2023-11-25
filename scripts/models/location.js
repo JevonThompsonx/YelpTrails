@@ -1,31 +1,35 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 const locationSchema = new Schema({
     city: {
         type: String,
-        required: true
+        required: true,
     },
     growth_from_2000_to_2013: {
         type: String,
         required: false,
-        default: 'unknown'
-    }, latitude: {
+        default: "unknown",
+    },
+    latitude: {
         type: Number,
-        required: false
+        required: false,
     },
     longitude: {
         type: Number,
-        required: false
-    }, population: {
+        required: false,
+    },
+    population: {
         type: String,
-        required: false
-    }, rank: {
+        required: false,
+    },
+    rank: {
         type: String,
-        required: false
-    }, state: {
+        required: false,
+    },
+    state: {
         type: String,
-        required: true
-    }
+        required: true,
+    },
 });
-const location = mongoose.model('location', locationSchema);
+const location = mongoose.model("location", locationSchema);
 export { location, locationSchema };
