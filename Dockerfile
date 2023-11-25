@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install --only=production
+RUN npm install --omit=dev
 
 COPY --chown=node:node . .
 
@@ -13,4 +13,4 @@ ENV PORT=8080
 
 EXPOSE 8080 
 USER node
-CMD ["dumb-init", "node", "index.js"]
+CMD ["dumb-init", "node", "scripts/start"]
