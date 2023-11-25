@@ -7,18 +7,19 @@
      border-zinc-950 rounded-lg border-solid border-2
     flex flex-col justify-evenly items-center 
     text-lg py-2" action="/trails/<%=_id%>/edit" method="post">
-        <h1>New Trail Form </h1>
-        <div class="flex justify-evenly items-center w-full h-10">
-            <label for="trailName">Name:</label>
-            <input class="w-1/2 h-full p-2" value="<%=name%>"  type="text" name="newTrailName" id="trailName">
-        </div>
+        <h1 class="text-2xl font-bold"><%= singleTrail.name %> </h1>
         <div class="flex justify-evenly items-center w-full h-10">
             <label >Owner:</label>
             <label class="w-1/2 h-full p-2"><%= owner %></label>
         </div>
         <div class="flex justify-evenly items-center w-full h-10">
             <label for="trailPrice">Price:</label>
-            <input class="w-1/2 h-full p-2" value="<%= price %>" type="text" name="newTrailPrice" id="trailPrice">
+            <div class="w-1/2 h-full flex items-center">
+                <span class="w-2/12 h-full py-2 pl-3 bg- rounded-md rounded-r-none bg-green-600">$</span>
+                <input class="w-10/12 p-2 h-full rounded-md rounded-l-none" value="<%= singleTrail.price %>" type="text" name="newTrailPrice"
+                    id="trailPrice">
+            </div>
+
         </div>
         <label for="trailLocation">Trail Location:</label>
         <div class="flex justify-evenly items-center w-full h-24">
