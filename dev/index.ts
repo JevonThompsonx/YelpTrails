@@ -264,7 +264,15 @@ app.use((err: AppError, req: Request, res: Response, next: NextFunction) => {
 			"The page does not exists or was removed. I suggest you go back to the homepage";
 		linkText = "Homepage";
 		imageSource = "/images/undraw_location_search.svg";
-	} else {
+	} else if (status === 403) { 
+		link = "/";
+		errorMessage =
+			"Admin action requested by non-admin. Please stop it";
+		linkText = "Homepage";
+		imageSource = "/images/undraw_fixing_bugs.svg";
+
+	}
+	else {
 		link = "/contact";
 		errorMessage =
 			"A server error occured. Please report any unexpected misshaps";

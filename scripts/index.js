@@ -216,6 +216,13 @@ app.use((err, req, res, next) => {
         linkText = "Homepage";
         imageSource = "/images/undraw_location_search.svg";
     }
+    else if (status === 403) {
+        link = "/";
+        errorMessage =
+            "Admin action requested by non-admin. Please stop it";
+        linkText = "Homepage";
+        imageSource = "/images/undraw_fixing_bugs.svg";
+    }
     else {
         link = "/contact";
         errorMessage =
