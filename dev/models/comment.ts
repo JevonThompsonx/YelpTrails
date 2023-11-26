@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
+import joi from 'joi'
 
 const commentSchema = new Schema({
 	title: {
@@ -19,8 +20,14 @@ const commentSchema = new Schema({
 		type: String,
 		require: [true, 'Cannot post blank comment']
 	},
-});
+}),
+joiCommentSchema = joi.object({
+	title: joi.string().required(),
+	user: joi.string().required(),
+	posted: joi.string(),
+	text : joi.string().required()
+})
 
 const comment = mongoose.model("comment", commentSchema);
 
-export { comment, commentSchema };
+export { comment, commentSchema, joiCommentSchema };

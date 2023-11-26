@@ -6,6 +6,7 @@ import connectionString from "./utils/connectionString.js";
 import tagTypes from "./seeds/seedData/tagTypes.js";
 import fileDirName from "./utils/file-dir-name.js";
 import AppError from "./utils/AppError.js";
+import { joiForm, } from "./utils/middleware/index.js";
 const { __dirname } = fileDirName(import.meta), app = express();
 app.engine("ejs", engine);
 app.use(express.static(path.join(__dirname, "../")));
@@ -107,7 +108,7 @@ app.get("/newTrail", (req, res, next) => {
 });
 app.post("/newTrail", async (req, res, next) => {
     try {
-        const { newTrailName, newTrailOwner, newTrailCity, newTrailState } = req.body, selectedTags = [];
+        const { name, owner, city, price, state } = req.body, selectedTags = [];
         for (let potentialTag in req.body) {
             if (req.body[`${potentialTag}`] === "on") {
                 selectedTags.push(potentialTag);
@@ -116,11 +117,12 @@ app.post("/newTrail", async (req, res, next) => {
             }
         }
         const newTrail = new trail({
-            name: newTrailName,
-            owner: newTrailOwner,
+            name: name,
+            owner: owner,
+            price: price,
             location: {
-                city: newTrailCity,
-                state: newTrailState,
+                city: city,
+                state: state,
             },
             tags: [...selectedTags],
         });
@@ -151,8 +153,8 @@ app.get("/trails/:id/edit", async (req, res, next) => {
         next(new AppError("Cannot edit invalid page", 404));
     }
 });
-app.post("/trails/:id/edit", async (req, res, next) => {
-    const { id: trailId } = req.params, { newTrailName, newTrailPrice, newTrailCity, newTrailState } = req.body;
+app.post("/trails/:id/edit", joiForm, async (req, res, next) => {
+    const { id: trailId } = req.params, { name, price, city, state } = req.body;
     try {
         const selectedTags = [];
         for (let potentialTag in req.body) {
@@ -162,20 +164,19 @@ app.post("/trails/:id/edit", async (req, res, next) => {
             else {
             }
         }
-        console.log(selectedTags);
         await trail.findByIdAndUpdate(trailId, {
-            name: newTrailName,
-            price: newTrailPrice,
+            name: name,
+            price: price,
             tags: [...selectedTags],
             location: {
-                city: newTrailCity,
-                state: newTrailState,
+                city: city,
+                state: state,
             },
         });
         res.redirect(`/trails/${trailId}`);
     }
     catch {
-        next(new AppError("Required data was not inserted. Please try again", 404));
+        next(new AppError("Required data was not inserted. Please try again", 400));
     }
 });
 app.get("/trails/:id/delete", async (req, res, next) => {
@@ -198,7 +199,7 @@ app.get("/adminLogin/:id", (req, res, next) => {
     else
         res.send("Login worked!!");
 });
-app.get("*", (req, res, next) => {
+app.all("*", (req, res, next) => {
     next(new AppError("Page not found", 404));
 });
 app.use((err, req, res, next) => {
@@ -215,6 +216,12 @@ app.use((err, req, res, next) => {
         link = "/";
         errorMessage = "Admin action requested by non-admin. Please stop it";
         linkText = "Homepage";
+        imageSource = "/images/undraw_fixing_bugs.svg";
+    }
+    else if (status === 400) {
+        link = "/contact";
+        errorMessage = "User Error";
+        linkText = "Contact";
         imageSource = "/images/undraw_fixing_bugs.svg";
     }
     else {

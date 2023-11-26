@@ -1,0 +1,11 @@
+import { joiUserSchema, joi } from "../../models/index.js";
+import { Request, Response, NextFunction } from "express";
+import AppError from "../AppError.js";
+
+export default (req: Request, res: Response, next: NextFunction) => {
+	const { User } = req.body,
+		error = joiUserSchema.validate(User);
+	if (error) {
+		next(new AppError("Invalid User structure. Please try again", 400));
+	} else {next()}
+};

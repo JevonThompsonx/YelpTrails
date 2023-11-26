@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
-const { Schema } = mongoose;
-const userSchema = new Schema({
-    name: {
+import joi from "joi";
+const { Schema } = mongoose, userSchema = new Schema({
+    userID: {
         type: String,
-        required: [true, 'Valid login id required to sign up']
+        required: [true, "Valid login id required to sign up"],
+    },
+    password: {
+        type: String,
+        required: [true, "Valid password required to sign up"],
     },
     birthDay: {
         type: Date,
@@ -16,9 +20,14 @@ const userSchema = new Schema({
     },
     role: {
         type: ["user", "admin"],
-        required: true,
+        required: false,
         default: "user",
     },
-});
-const user = mongoose.model("user", userSchema);
-export { user, userSchema };
+}), joiUserSchema = joi.object({
+    userID: joi.string().required,
+    password: joi.string().required,
+    birthday: joi.date(),
+    comments: joi.array().items(joi.string()) || joi.array().empty(),
+    role: joi.string()
+}), user = mongoose.model("user", userSchema);
+export { user, userSchema, joiUserSchema };
