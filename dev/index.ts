@@ -237,14 +237,15 @@ app.get("/trails/:id/delete", async (req, res, next) => {
 	}
 });
 
-app.get("/adminLogin/:id", (req, res) => {
+app.get("/adminLogin/:id", (req, res, next) => {
 	const { id: password } = req.params;
 	if (password != "toeBeans") {
 		throw new AppError("Incorrect password", 403);
 	} else res.send("Login worked!!");
+	next();
 });
 
-app.get("*", (req, res) => {
+app.get("*", (req, res, next) => {
 	console.log("Got to base error");
 	throw new AppError("Page not found", 404);
 });
@@ -252,6 +253,32 @@ app.get("*", (req, res) => {
 app.use((err: AppError, req: Request, res: Response, next: NextFunction) => {
 	console.log("Got to final error");
 	const { status = 500, message = "Something went wrong" } = err;
-	res.render("error", { status, message, pageName: "Error" });
+	let pageName = `${status} error`,
+		link,
+		linkText,
+		errorMessage,
+		imageSource;
+	if (status === 404) {
+		link = "/";
+		errorMessage =
+			"The page does not exists or was removed. I suggest you go back to the homepage";
+		linkText = "Homepage";
+		imageSource = "/images/undraw_location_search.svg";
+	} else {
+		link = "/contact";
+		errorMessage =
+			"A server error occured. Please report any unexpected misshaps";
+		linkText = "Contact";
+		imageSource = "/images/undraw_server_down.svg";
+	}
+	res.render("error", {
+		status,
+		message,
+		pageName,
+		link,
+		errorMessage,
+		linkText,
+		imageSource,
+	});
 	next(err);
 });
