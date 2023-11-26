@@ -4,16 +4,16 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
 	name: {
 		type: String,
-		required: true,
+		required: [true,'Valid login id required to sign up'] 
 	},
 	birthDay: {
 		type: Date,
-		required: true,
+		required: false,
 	},
 	// age: (new Date - birthDay),
 	comments: {
 		type: [String],
-		required: true,
+		required: false,
 		default: [],
 	},
 	role: {

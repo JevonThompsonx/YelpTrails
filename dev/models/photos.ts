@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const photosSchema = new Schema({
 	link: {
 		type: String,
-		required: true,
+		required: [true,'Photo url link required'] 
 	},
 });
 

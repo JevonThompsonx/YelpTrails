@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import "dotenv/config";
-configDotenv({ path: "../.env" });
+configDotenv({ path: "../../.env" });
 import { configDotenv } from "dotenv";
 const API_KEY = process.env.API_KEY;
 

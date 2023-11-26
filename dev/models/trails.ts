@@ -7,7 +7,7 @@ import { tagTypes } from "../seeds/seedData/index.js";
 const trailSchema = new Schema({
 	name: {
 		type: String,
-		required: true,
+		required: [true,'Trail name required']
 	},
 	price: {
 		type: Number,
@@ -20,7 +20,7 @@ const trailSchema = new Schema({
 	},
 	location: {
 		type: locationSchema,
-		required: true,
+		required: [true, 'Trail location info invalid']
 	},
 	description: {
 		type: String,

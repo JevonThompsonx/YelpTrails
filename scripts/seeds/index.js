@@ -1,12 +1,12 @@
 import seedConnectionString from "./seedConnectionString.js";
 import { trail } from "../models/index.js";
 import { cities } from "./seedData/index.js";
-import randNumGen from "./seedingFuncs/randNumGen.js";
-import getRandOwnerName from "./seedingFuncs/getRandOwnerName.js";
-import getRandRating from "./seedingFuncs/getRandRating.js";
-import getRandCampName from "./seedingFuncs/getRandCampName.js";
-import getFourTags from "./seedingFuncs/getFourTags.js";
-import getRandUnsplashImage from "./seedingFuncs/getRandUnsplashImage.js";
+import randNumGen from "./seedingUtils/randNumGen.js";
+import getRandOwnerName from "./seedingUtils/getRandOwnerName.js";
+import getRandRating from "./seedingUtils/getRandRating.js";
+import getRandCampName from "./seedingUtils/getRandCampName.js";
+import getFourTags from "./seedingUtils/getFourTags.js";
+import getRandUnsplashImage from "./seedingUtils/getRandUnsplashImage.js";
 await seedConnectionString();
 const deleteCampData = async () => await trail.deleteMany();
 const seedCamp = async () => {

@@ -2,10 +2,10 @@ import express from "express";
 import path from "path";
 import engine from "ejs-mate";
 import { trail } from "./models/index.js";
-import connectionString from "./connectionString.js";
+import connectionString from "./utils/connectionString.js";
 import tagTypes from "./seeds/seedData/tagTypes.js";
-import fileDirName from "./setup/file-dir-name.js";
-import AppError from "./error_handling/AppError.js";
+import fileDirName from "./utils/file-dir-name.js";
+import AppError from "./utils/AppError.js";
 const { __dirname } = fileDirName(import.meta), app = express();
 app.engine("ejs", engine);
 app.use(express.static(path.join(__dirname, "../")));
@@ -32,7 +32,7 @@ app.get("/", (req, res, next) => {
 });
 app.get("/trails/all", async (req, res, next) => {
     const allTrails = await trail.find();
-    if (!allTrails) {
+    if (allTrails.length === 0) {
         try {
             res.redirect("/trails/all");
         }

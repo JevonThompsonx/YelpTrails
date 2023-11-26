@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const locationSchema = new Schema({
     city: {
         type: String,
-        required: true,
+        required: [true, 'Trail city location required']
     },
     growth_from_2000_to_2013: {
         type: String,
@@ -28,7 +28,7 @@ const locationSchema = new Schema({
     },
     state: {
         type: String,
-        required: true,
+        required: [true, 'Trail state location required']
     },
 });
 const location = mongoose.model("location", locationSchema);
