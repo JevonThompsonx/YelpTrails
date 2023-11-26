@@ -1,16 +1,12 @@
 <% layout('layouts/boilerplate') %>
-<% if (status === 404) { %>
- <div class="h-full w-full flex justify-center items-center bg-404">
-    <h1 class="text-9xl">Error!</h1>
-    <h2><%= status %></h2>
-    <h3><%= message %></h3>
+ <div class="md:h-full md:w-auto flex md:flex-row flex-col md:justify-evenly  md:items-center h-1/3md: w-full md:p-0 p-4 ">
+    <div class="flex flex-col space-y-8 md:justify-center justify-evenly items-center md:h-full md:w-1/3 w-full h-1/3 ">
+    <h1 class="text-4xl text-center">OH NO! ERROR <%= status %></h1>
+        <h2 class="text-xl"><%= message %></h2>
+        <h3 class="text-xl text-center"><%= errorMessage %></h3>
+        <a aria-label="Button that routes back to YelpTrails homepage" href="<%=link%>" class="bg-bloo p-4 text-xl text-whiteish h-16 w-32 rounded-md shadow-lg shadow-limeGreen">
+            <%= linkText %>
+        </a>
+    </div>
+    <img class="md:w-1/2 md:h-auto aspect-square h-1/2 w-full" src="<%=imageSource%>" alt="">
 </div>
-
-<% } else { %>
- <div class="h-full w-full flex justify-center items-center bg-500">
-    <h1 class="text-9xl">Error!</h1>
-    <h2><%= status %></h2>
-    <h3><%= message %></h3>
-</div>
-<% } %>
-
