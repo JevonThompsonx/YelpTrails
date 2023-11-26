@@ -6,8 +6,8 @@ import connectionString from "./utils/connectionString.js";
 import tagTypes from "./seeds/seedData/tagTypes.js";
 import fileDirName from "./utils/file-dir-name.js";
 import AppError from "./utils/AppError.js";
-import { joiForm, } from "./utils/middleware/index.js";
-const { __dirname } = fileDirName(import.meta), app = express();
+import { joiForm } from "./utils/middleware/index.js";
+const { __dirname } = fileDirName(import.meta), app = express(), port = process.env.PORT || 8080;
 app.engine("ejs", engine);
 app.use(express.static(path.join(__dirname, "../")));
 app.use(express.urlencoded({
@@ -16,7 +16,6 @@ app.use(express.urlencoded({
 app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
-const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
@@ -106,7 +105,7 @@ app.get("/newTrail", (req, res, next) => {
         next(new AppError("New trail form not found. Please allow some time to fix", 502));
     }
 });
-app.post("/newTrail", async (req, res, next) => {
+app.post("/newTrail", joiForm, async (req, res, next) => {
     try {
         const { name, owner, city, price, state } = req.body, selectedTags = [];
         for (let potentialTag in req.body) {
