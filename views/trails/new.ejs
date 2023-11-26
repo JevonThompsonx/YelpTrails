@@ -9,18 +9,18 @@
         <h1 class="text-2xl">New Trail </h1>
         <div class="flex justify-evenly items-center w-full h-10">
             <label for="trailName">Name:</label>
-            <input class="w-1/2 h-full p-2" type="text" name="newTrailName" id="trailName">
+            <input class="w-1/2 h-full p-2" type="text" name="newTrailName" id="trailName" required>
         </div>
         <div class="flex justify-evenly items-center w-full h-10">
             <label for="trailOwner">Owner:</label>
-            <input class="w-1/2 h-full p-2" type="text" name="newTrailOwner" id="trailOwner">
+            <input class="w-1/2 h-full p-2" type="text" name="newTrailOwner" id="trailOwner" required>
         </div>
         <div class="flex justify-evenly items-center w-full h-10">
             <label for="trailPrice">Price:</label>
             <div class="w-1/2 h-full flex items-center">
                 <span class="w-2/12 h-full py-2 pl-3 bg- rounded-md rounded-r-none bg-green-600">$</span>
                 <input class="w-10/12 p-2 h-full rounded-md rounded-l-none" value="" type="text" name="newTrailPrice"
-                    id="trailPrice">
+                    id="trailPrice" required>
             </div>
 
         </div>
@@ -31,8 +31,8 @@
                 <label for="trailCity">State:</label>
             </div>
             <div class="h-full w-1/2 trailCityAndState flex flex-col justify-evenly">
-                <input class="h-10 p-2" type="text" name="newTrailCity" id="trailCity">
-                <input class="h-10 p-2" type="text" name="newTrailState" id="trailState">
+                <input class="h-10 p-2" type="text" name="newTrailCity" id="trailCity" required>
+                <input class="h-10 p-2" type="text" name="newTrailState" id="trailState" required>
             </div>
 
         </div>
