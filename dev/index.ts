@@ -12,14 +12,11 @@ import connectionString from "./utils/connectionString.js";
 import tagTypes from "./seeds/seedData/tagTypes.js";
 import fileDirName from "./utils/file-dir-name.js";
 import AppError from "./utils/AppError.js";
-import {
-	joiComment,
-	joiForm,
-	joiUser,
-} from "./utils/middleware/index.js";
+import { joiComment, joiForm, joiUser } from "./utils/middleware/index.js";
 
 const { __dirname } = fileDirName(import.meta),
-	app = express();
+	app = express(),
+	port = process.env.PORT || 8080;
 
 //layout
 app.engine("ejs", engine);
@@ -36,8 +33,6 @@ app.use(express.json());
 app.set("view engine", "ejs");
 //sets view folder as '/views'
 app.set("views", path.join(__dirname, "../views"));
-
-const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
 	console.log(`Listening on port ${port}`);
@@ -145,7 +140,7 @@ app.get("/newTrail", (req, res, next) => {
 	}
 });
 
-app.post("/newTrail", async (req, res, next) => {
+app.post("/newTrail", joiForm, async (req, res, next) => {
 	try {
 		const { name, owner, city, price, state } = req.body,
 			selectedTags = [];
