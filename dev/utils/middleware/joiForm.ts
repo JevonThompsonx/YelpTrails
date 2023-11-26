@@ -1,4 +1,4 @@
-import { joiTrailSchema, joi } from "../../models/index.js";
+import { joiTrailSchema} from "../../models/index.js";
 import { Request, Response, NextFunction } from "express";
 import AppError from "../AppError.js";
 

@@ -1,4 +1,4 @@
-import { joiUserSchema, joi } from "../../models/index.js";
+import { joiUserSchema } from "../../models/index.js";
 import { Request, Response, NextFunction } from "express";
 import AppError from "../AppError.js";
 
