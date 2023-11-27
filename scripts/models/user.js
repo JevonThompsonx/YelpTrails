@@ -1,7 +1,6 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import joi from "joi";
-import { commentSchema } from "./comment";
-const userSchema = new Schema({
+const ObjectId = Schema.Types.ObjectId, userSchema = new Schema({
     userID: {
         type: String,
         required: [true, "Valid login id required to sign up"],
@@ -14,7 +13,12 @@ const userSchema = new Schema({
         type: Date,
         required: false,
     },
-    comments: commentSchema,
+    comments: [
+        {
+            type: ObjectId,
+            ref: "comment",
+        },
+    ],
     role: {
         type: ["user", "admin"],
         required: false,
@@ -26,5 +30,5 @@ const userSchema = new Schema({
     birthday: joi.date(),
     comments: joi.array().items(joi.string()) || joi.array().empty(),
     role: joi.string(),
-}), user = mongoose.model("user", userSchema);
+}), user = model("user", userSchema);
 export { user, userSchema, joiUserSchema };

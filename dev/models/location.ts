@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema,model } from "mongoose";
 import joi from "joi";
 const locationSchema = new Schema({
 		city: {
@@ -40,6 +40,6 @@ const locationSchema = new Schema({
 		rank: joi.string(),
 		growth_from_2000_to_2013: joi.string(),
 	});
-const location = mongoose.model("location", locationSchema);
+const location = model("location", locationSchema);
 
 export { location, locationSchema, joiLocationSchema };

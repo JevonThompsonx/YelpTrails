@@ -1,4 +1,4 @@
-import mongoose, { Schema} from "mongoose";
+import mongoose, { Schema,model} from "mongoose";
 
 const photosSchema = new Schema({
 	link: {
@@ -7,6 +7,6 @@ const photosSchema = new Schema({
 	},
 });
 
-const photo = mongoose.model("photo", photosSchema);
+const photo = model("photo", photosSchema);
 
 export default photo;

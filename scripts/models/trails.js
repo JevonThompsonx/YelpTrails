@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { locationSchema } from "./location.js";
 import { commentSchema } from "./comment.js";
 import { tagTypes } from "../seeds/seedData/index.js";
@@ -59,5 +59,5 @@ const trailSchema = new Schema({
     tags: joi.array().items(joi.string() || joi.array().empty("")),
 })
     .required();
-const trail = mongoose.model("trail", trailSchema);
+const trail = model("trail", trailSchema);
 export { trail, trailSchema, joiTrailSchema, joi };

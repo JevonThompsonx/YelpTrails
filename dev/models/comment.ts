@@ -1,4 +1,4 @@
-import mongoose, { Schema} from "mongoose";
+import mongoose, { Schema,model} from "mongoose";
 import joi from 'joi'
 
 const commentSchema = new Schema({
@@ -27,6 +27,6 @@ joiCommentSchema = joi.object({
 	text : joi.string().required()
 })
 
-const comment = mongoose.model("comment", commentSchema);
+const comment = model("comment", commentSchema);
 
 export { comment, commentSchema, joiCommentSchema };
