@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+import mongoose, { Schema} from "mongoose";
 import { locationSchema } from "./location.js";
 import { commentSchema } from "./comment.js";
 import { tagTypes } from "../seeds/seedData/index.js";

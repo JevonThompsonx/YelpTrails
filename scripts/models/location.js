@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import joi from "joi";
-const { Schema } = mongoose, locationSchema = new Schema({
+const locationSchema = new Schema({
     city: {
         type: String,
         required: [true, "Trail city location required"],
@@ -37,7 +37,7 @@ const { Schema } = mongoose, locationSchema = new Schema({
     longitude: joi.number(),
     population: joi.string(),
     rank: joi.string(),
-    growth_from_2000_to_2013: joi.string()
+    growth_from_2000_to_2013: joi.string(),
 });
 const location = mongoose.model("location", locationSchema);
 export { location, locationSchema, joiLocationSchema };
