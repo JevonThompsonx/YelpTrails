@@ -7,12 +7,12 @@ import express, {
 import path from "path";
 //@ts-ignore
 import engine from "ejs-mate";
-import { trail, joiTrailSchema, joi } from "./models/index.js";
+import { trail, joiTrailSchema, joi, tag } from "./models/index.js";
 import connectionString from "./utils/connectionString.js";
-import tagTypes from "./seeds/seedData/tagTypes.js";
 import fileDirName from "./utils/file-dir-name.js";
 import AppError from "./utils/AppError.js";
 import { joiComment, joiForm, joiUser } from "./utils/middleware/index.js";
+import tagTypes from "./models/modelData/tagTypes.js";
 
 const { __dirname } = fileDirName(import.meta),
 	app = express(),

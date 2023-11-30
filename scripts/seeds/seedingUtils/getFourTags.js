@@ -1,18 +1,20 @@
-import { tagTypes } from "../seedData/index.js";
+import { tag } from "../../models/index.js";
 import randNumGen from "./randNumGen.js";
-const geTrandTag = () => {
-    return tagTypes[randNumGen(tagTypes.length)];
+import seedFuncsConnectionString from "./seedFuncsConnectionString.js";
+await seedFuncsConnectionString();
+const tagTypes = await tag.find();
+const getRandTag = () => {
+    return tagTypes[randNumGen(tagTypes.length)].tag;
 };
-export default () => {
-    let tempTagArray = ["Empty"];
-    for (let i = 0; tempTagArray.length < 5; i++) {
-        let newTag = geTrandTag();
+export default async () => {
+    let tempTagArray = [];
+    for (let i = 0; tempTagArray.length < 4; i++) {
+        let newTag = await getRandTag();
         if (tempTagArray.includes(newTag)) {
         }
         else {
             tempTagArray.push(newTag);
         }
     }
-    tempTagArray.shift();
     return tempTagArray;
 };

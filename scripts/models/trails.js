@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 import { locationSchema } from "./location.js";
 import { commentSchema } from "./comment.js";
-import { tagTypes } from "../seeds/seedData/index.js";
+import { tagTypes } from "./modelData/index.js";
 import joi from "joi";
 const trailSchema = new Schema({
     name: {
@@ -31,9 +31,10 @@ const trailSchema = new Schema({
         default: [],
     },
     tags: {
-        type: [...tagTypes],
+        type: [String],
         required: false,
-        decault: [],
+        default: [],
+        enum: [...tagTypes]
     },
     rating: {
         type: String,
