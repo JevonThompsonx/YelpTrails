@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import "dotenv/config";
-configDotenv({ path: "../../.env" });
 import { configDotenv } from "dotenv";
+configDotenv({ path: "../../.env" });
 const API_KEY = process.env.API_KEY;
 
 const connectionString = async () => {

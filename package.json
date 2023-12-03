@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "start": "node scripts/index.js",
-    "node": "nodemon .ejs .js .css",
     "tailwind": "npx tailwindcss -i ./css/styles.css -o ./css/output.css --watch",
     "tsConvert": "tsc -w",
     "dev": "concurrently --kill-others \"tsc -w\" \"nodemon .ejs .js .css\" \"npx tailwindcss -i ./css/styles.css -o ./css/output.css --watch\" "

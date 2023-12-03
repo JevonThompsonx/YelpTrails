@@ -1,6 +1,6 @@
 class AppError extends Error {
 	status: any;
-	constructor(message: string, status: any) {
+	constructor(status: any, message: string) {
 		super();
 		this.message = message;
 		this.status = status;

@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 import tagTypes from "../models/modelData/tagTypes.js";
 import modelsConnectionString from "./modelsConnectionString.js";
 
