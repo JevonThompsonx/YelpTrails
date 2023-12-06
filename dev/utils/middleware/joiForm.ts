@@ -1,4 +1,4 @@
-import { joiTrailSchema} from "../../models/index.js";
+import { joiTrailSchema } from "../../models/index.js";
 import { Request, Response, NextFunction } from "express";
 import AppError from "../AppError.js";
 
@@ -23,7 +23,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
 
 	if (error) {
 		const msg = error.details.map((element) => element.message).join(",");
-		next(new AppError(msg, 400));
+		next(new AppError(400, msg));
 	} else {
 		next();
 	}
