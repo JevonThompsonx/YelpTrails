@@ -50,7 +50,7 @@ app.get("/", (req, res, next) => {
 	}
 });
 app.get("/trails/all", async (req, res, next) => {
-	const allTrails = await trail.find();
+	const allTrails = await trail.find().lean();
 	if (allTrails.length === 0) {
 		//if trails not found:
 		try {
@@ -75,7 +75,7 @@ app.get("/trails/:id", async (req, res, next) => {
 	const { id: trailId } = req.params;
 
 	try {
-		const singleTrail = await trail.findById(trailId),
+		const singleTrail = await trail.findById(trailId).lean(),
 			pageName = singleTrail?.name;
 		res.render("trails/single", {
 			singleTrail,
@@ -91,7 +91,7 @@ app.get("/trails/owners/:id", async (req, res, next) => {
 	try {
 		const trailsByOwnerName = await trail.find({
 				owner: trailOwnerName,
-			}),
+			}).lean(),
 			pageName = trailOwnerName;
 		res.render("trails/byOwnerName", {
 			trailsByOwnerName,
@@ -108,14 +108,13 @@ app.get("/trails/tags/:id", async (req, res, next) => {
 	const { id: tag } = req.params,
 		taggedTrails = await trail.find({
 			tags: tag,
-		});
+		}).lean();
 
 	if (taggedTrails.length === 0) {
 		//if tag not found:
 		next(new AppError(404, `Tag '${tag}' not found`));
 	} else {
 		const pageName = `Tags | ${tag}`;
-		console.log(taggedTrails);
 		res.render("trails/tag", {
 			tag,
 			taggedTrails,
@@ -168,7 +167,7 @@ app.post("/newTrail", joiForm, async (req, res, next) => {
 app.get("/trails/:id/edit", async (req, res, next) => {
 	const { id: trailId } = req.params;
 	try {
-		const singleTrail = await trail.findById(trailId),
+		const singleTrail = await trail.findById(trailId).lean(),
 			pageName = singleTrail?.name,
 			existingTags = singleTrail?.tags?.map((tag) => tag),
 			tagTypeDupe = tagTypes.map((tag) => {

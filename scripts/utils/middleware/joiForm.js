@@ -18,7 +18,7 @@ export default (req, res, next) => {
     }, { error } = joiTrailSchema.validate(validationObject);
     if (error) {
         const msg = error.details.map((element) => element.message).join(",");
-        next(new AppError(msg, 400));
+        next(new AppError(400, msg));
     }
     else {
         next();

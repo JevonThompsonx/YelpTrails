@@ -27,17 +27,17 @@ app.get("/", (req, res, next) => {
         });
     }
     catch {
-        next(new AppError("Homepage not loading", 503));
+        next(new AppError(503, "Homepage not loading"));
     }
 });
 app.get("/trails/all", async (req, res, next) => {
-    const allTrails = await trail.find();
+    const allTrails = await trail.find().lean();
     if (allTrails.length === 0) {
         try {
             res.redirect("/trails/all");
         }
         catch {
-            next(new AppError("Trails not found. Server possibly down", 503));
+            next(new AppError(503, "Trails not found. Server possibly down"));
         }
     }
     else {
@@ -51,14 +51,14 @@ app.get("/trails/all", async (req, res, next) => {
 app.get("/trails/:id", async (req, res, next) => {
     const { id: trailId } = req.params;
     try {
-        const singleTrail = await trail.findById(trailId), pageName = singleTrail?.name;
+        const singleTrail = await trail.findById(trailId).lean(), pageName = singleTrail?.name;
         res.render("trails/single", {
             singleTrail,
             pageName,
         });
     }
     catch {
-        next(new AppError("Trail not found", 404));
+        next(new AppError(404, "Trail not found"));
     }
 });
 app.get("/trails/owners/:id", async (req, res, next) => {
@@ -66,7 +66,7 @@ app.get("/trails/owners/:id", async (req, res, next) => {
     try {
         const trailsByOwnerName = await trail.find({
             owner: trailOwnerName,
-        }), pageName = trailOwnerName;
+        }).lean(), pageName = trailOwnerName;
         res.render("trails/byOwnerName", {
             trailsByOwnerName,
             trailOwnerName,
@@ -74,19 +74,18 @@ app.get("/trails/owners/:id", async (req, res, next) => {
         });
     }
     catch {
-        next(new AppError(`Owner ${trailOwnerName} does not exist`, 404));
+        next(new AppError(404, `Owner ${trailOwnerName} does not exist`));
     }
 });
 app.get("/trails/tags/:id", async (req, res, next) => {
     const { id: tag } = req.params, taggedTrails = await trail.find({
         tags: tag,
-    });
+    }).lean();
     if (taggedTrails.length === 0) {
-        next(new AppError(`Tag '${tag}' not found`, 404));
+        next(new AppError(404, `Tag '${tag}' not found`));
     }
     else {
         const pageName = `Tags | ${tag}`;
-        console.log(taggedTrails);
         res.render("trails/tag", {
             tag,
             taggedTrails,
@@ -102,7 +101,7 @@ app.get("/newTrail", (req, res, next) => {
         });
     }
     catch {
-        next(new AppError("New trail form not found. Please allow some time to fix", 502));
+        next(new AppError(502, "New trail form not found. Please allow some time to fix"));
     }
 });
 app.post("/newTrail", joiForm, async (req, res, next) => {
@@ -128,13 +127,13 @@ app.post("/newTrail", joiForm, async (req, res, next) => {
         await newTrail.save();
     }
     catch {
-        next(new AppError("Trail failed to post. Please try again", 503));
+        next(new AppError(503, "Trail failed to post. Please try again"));
     }
 });
 app.get("/trails/:id/edit", async (req, res, next) => {
     const { id: trailId } = req.params;
     try {
-        const singleTrail = await trail.findById(trailId), pageName = singleTrail?.name, existingTags = singleTrail?.tags?.map((tag) => tag), tagTypeDupe = tagTypes.map((tag) => {
+        const singleTrail = await trail.findById(trailId).lean(), pageName = singleTrail?.name, existingTags = singleTrail?.tags?.map((tag) => tag), tagTypeDupe = tagTypes.map((tag) => {
             if (existingTags?.includes(tag) || existingTags === undefined) {
             }
             else {
@@ -149,7 +148,7 @@ app.get("/trails/:id/edit", async (req, res, next) => {
         });
     }
     catch {
-        next(new AppError("Cannot edit invalid page", 404));
+        next(new AppError(404, "Cannot edit invalid page"));
     }
 });
 app.post("/trails/:id/edit", joiForm, async (req, res, next) => {
@@ -175,7 +174,7 @@ app.post("/trails/:id/edit", joiForm, async (req, res, next) => {
         res.redirect(`/trails/${trailId}`);
     }
     catch {
-        next(new AppError("Required data was not inserted. Please try again", 400));
+        next(new AppError(400, "Required data was not inserted. Please try again"));
     }
 });
 app.get("/trails/:id/delete", async (req, res, next) => {
@@ -187,19 +186,19 @@ app.get("/trails/:id/delete", async (req, res, next) => {
         res.redirect("/trails/all");
     }
     catch {
-        next(new AppError("Error. Cannot delete a trail that does not exist", 404));
+        next(new AppError(404, "Error. Cannot delete a trail that does not exist"));
     }
 });
 app.get("/adminLogin/:id", (req, res, next) => {
     const { id: password } = req.params;
     if (password != "toeBeans") {
-        next(new AppError("Incorrect password", 403));
+        next(new AppError(403, "Incorrect password"));
     }
     else
         res.send("Login worked!!");
 });
 app.all("*", (req, res, next) => {
-    next(new AppError("Page not found", 404));
+    next(new AppError(404, "Page not found"));
 });
 app.use((err, req, res, next) => {
     const { status = 500, message = "Something went wrong" } = err;

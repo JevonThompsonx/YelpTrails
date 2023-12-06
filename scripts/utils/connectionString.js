@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import "dotenv/config";
-configDotenv({ path: "../../.env" });
 import { configDotenv } from "dotenv";
+configDotenv({ path: "../../.env" });
 const API_KEY = process.env.API_KEY;
-const connectionString = async () => {
+export default async () => {
     await mongoose
         .connect(`mongodb+srv://Jevonx:${API_KEY}@cluster0.q4o1wzp.mongodb.net/?retryWrites=true&w=majority`, { dbName: "yelpTrails" })
         .then(() => {
@@ -13,4 +13,3 @@ const connectionString = async () => {
         console.log(`Connection errrorrrr`);
     });
 };
-export default connectionString;

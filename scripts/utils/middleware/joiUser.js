@@ -3,7 +3,7 @@ import AppError from "../AppError.js";
 export default (req, res, next) => {
     const { User } = req.body, error = joiUserSchema.validate(User);
     if (error) {
-        next(new AppError("Invalid User structure. Please try again", 400));
+        next(new AppError(400, "Invalid User structure. Please try again"));
     }
     else {
         next();
