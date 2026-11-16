@@ -6,8 +6,8 @@ on:
   pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: read
+# NOTE: no top-level `permissions:` block. Forgejo does not implement it and
+# warns "has a permissions field which is not supported ... and will be ignored".
 
 concurrency:
   group: ci-${{ forgejo.ref }}
@@ -20,6 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
